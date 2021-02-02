@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private float movementSpeed;
 
     public float playerSpeed;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         ProcessInput();
         MovePlayer();
+        AnimatePlayer();
     }
 
     void ProcessInput()
@@ -33,5 +35,10 @@ public class PlayerController : MonoBehaviour
     void MovePlayer()
     {
         rb.velocity = movementDirection * movementSpeed * playerSpeed;
+    }
+
+    void AnimatePlayer()
+    {
+        animator.SetFloat("Speed", movementSpeed);
     }
 }
