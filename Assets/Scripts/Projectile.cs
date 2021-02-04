@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// ReSharper disable All
 
 public class Projectile : MonoBehaviour
 {
     public float speed;
     public float lifeTime;
+    public float distance;
+    public LayerMask whatIsSolid;
 
     public GameObject destroyEffect;
 
@@ -16,7 +19,16 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector2.up * speed * Time.deltaTime);
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsSolid);
+        if (hitInfo.collider != null)
+        {
+            if (hitInfo.collider.CompareTag("Enemy"))
+            {
+                Debug.Log("ENEMY MUST TAKE DAMAGE !");
+            }
+            DestroyProjectile();
+        }
+        transform.Translate(Vector2.up * (speed * Time.deltaTime));
     }
 
     void DestroyProjectile()

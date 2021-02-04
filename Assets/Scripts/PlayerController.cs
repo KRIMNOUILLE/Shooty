@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        rb.velocity = movementDirection * movementSpeed * playerSpeed;
+        rb.velocity = movementDirection * (playerSpeed * movementSpeed);
     }
 
     void AnimatePlayer()
